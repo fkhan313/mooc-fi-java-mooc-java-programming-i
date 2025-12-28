@@ -14,6 +14,24 @@ public class NumbersFromAFile {
         System.out.print("Upper bound? ");
         int upperBound = Integer.valueOf(scanner.nextLine());
 
+        int count = 0;
+        try (Scanner fileReader = new Scanner(Paths.get(file))) {
+
+            while (fileReader.hasNextLine()) {
+                int num = Integer.valueOf(fileReader.nextLine());
+                if (!(num >= lowerBound && num <= upperBound)) {
+                    continue;
+                }
+
+                count++;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Reading the file " + file + " failed.");
+        }
+
+        System.out.println("Numbers: " + count);
+
     }
 
 }
